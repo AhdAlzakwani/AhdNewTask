@@ -1,0 +1,104 @@
+Introduction
+First of all , using Api in java is easy and has little
+steps and diffrint Results and this Documantion will make
+the process easy.
+
+*What is API :
+API is A documents wich give us A list of package ,classes with the fields and methods.
+API make the programmer to know how to use package, classes, and methods in java library.
+
+
+*How to use : 
+The first step , browse API URL in browser and show list of diffrent classes . 
+check if the classes in a list or not . try to convert that results into pseudocode to 
+understand where the classes and their fields . then useing java softwere like Eclips to use this API.
+
+* inside eclips we will convert JSON API into classes :
+public class ApiResults {
+
+     String gender; ** property **
+	 String email;  ** property **
+	 String phone;  ** property **
+	** Object Chining **
+	** Create Object from classes **
+	
+	 Picture picture;
+	 Registerd registerd;
+	 Name name;
+
+1)Featch the API URL to connet it and start use it :
+URL url =  new URL("https://randomuser.me/api/?results=30");
+
+2)To retrieve information from the URL using HttpURLConnection :
+HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+3)to Request the URLconnection to GET information from it :
+conn.setRequestMethod("GET");
+conn.connect();
+
+4) To retrieve all information in String data Type:
+StringBuilder informationString = new StringBuilder();
+
+5) URLconnection is ready now and all information inside informationString object , to check use :
+System.out.println(informationString);
+** all list from API will be display **
+
+6) Download all Libraries will need as JSON jar library :
+gson-2.6.2;
+
+7)Then creat Gson Object an use it in the class wiche use the classes wit getter and sitters :
+Gson gson = new Gson();						
+RandomUserAPI result= gson.fromJson(informationString.toString(), RandomUserAPI.class);
+public class RandomUserAPI {
+
+	private ApiInfo info;
+	private List<ApiResults> results;
+
+	public ApiInfo getInfo() {
+		return info;
+	}
+
+	public void setInfo(ApiInfo info) {
+		this.info = info;
+	}
+
+	public List<ApiResults> getResults() {
+		return results;
+	}
+
+	public void setResults(List<ApiResults> results) {
+		this.results = results;
+	}
+
+}
+
+8)Last Step using System.out.println to get values from API and Display it using Object Chining :
+	System.out.println("|"+"The Name Is : "+result.getResults().get(k).getName().getFirstName()+" "
+							+result.getResults().get(k).getName().getLastName());
+
+
+9)On Thursday I added Nationality,Gender,Include,Exclude  :
+ System.out.println to get values from API and Display it using Object Chining :
+	Ask user to enter Nationality:
+	the output will show information by the Nationality chosen by the user only
+	System.out.println("|"+"Nationality Is : "+result.getResults().get(0).getNat());
+
+	Ask user to enter Gender:
+	the output will show information by the Gender chosen by the user only	
+	To Specify Gender 
+	System.out.println("|"+"Gender Is : "+result.getResults().get(0).getGender());
+
+	Ask user to enter the fields want to Includes in the output:
+	the output will show information that was chosen to Include by user only
+	Enter fields you want to Include
+	System.out.println("|"+"Includes fields are  : "+ inc1);
+
+	
+	Ask user to enter the fields want to Exclude in the output:
+	the output will show information that was chosen to Exclude by user only
+	Enter fields you want to Exclude
+	System.out.println("|"+"Includes fields are  : "+ exc1);
+
+
+							
+ 
